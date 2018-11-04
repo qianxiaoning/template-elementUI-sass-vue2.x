@@ -11,6 +11,9 @@ main等含有子路由的页面，引入structures后，在插槽中插入router
 内页，引入structures后，直接在插槽中插入不同的html标签
 ```
 - 3、功能组件components（html,css,js）把相似结构，相似功能的部分抽出来，不同的dom结构用插槽预留
+```
+一般在内页使用
+```
 - 设置axios拦截器，加遮罩
 - 加vuex，vuex和fetch分开
 - 加事件总线
@@ -18,9 +21,6 @@ main等含有子路由的页面，引入structures后，在插槽中插入router
 - 公共js方法
 - 全局指令
 - config常用参数
-```
-一般在内页使用
-```
 ---
 # vue-cli脚手架
 # itservicecenter
