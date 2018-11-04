@@ -9,16 +9,24 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 // 改变 SCSS 变量，自定义主题色，待研究
 // import './App.scss'
-Vue.use(ElementUI);
-// axios
-import axios from 'axios'
-console.log(axios);
+Vue.use(ElementUI,{size:'small'});
+// http请求路径
+import urls from './http/urls'
+Vue.prototype.$urls = urls
+// http请求
+import http from './http/http'
+Vue.prototype.$http = http
+// vuex
+import vuex from './vuex'
+
+//生产环境警告去除
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  vuex,
   components: { App },
   template: '<App/>'
 })

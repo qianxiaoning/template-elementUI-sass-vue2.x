@@ -14,6 +14,10 @@ main等含有子路由的页面，引入structures后，在插槽中插入router
 - 设置axios拦截器，加遮罩
 - 加vuex，vuex和fetch分开
 - 加事件总线
+- 全局filter
+- 公共js方法
+- 全局指令
+- config常用参数
 ```
 一般在内页使用
 ```
