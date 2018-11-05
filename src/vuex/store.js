@@ -1,13 +1,14 @@
 // 生成一个公共的store
-import $http from '@/request/index'
-import {url} from "@/config/config";
+import $http from '@/http/http'
+import urls from "@/http/urls";
 /**
  *
  * @param {*} action  请求地址
  * @param {*} obj  参数对象，传入的参数可以替换默认store中的方法 
  */
+// 以下是移动端的列表滚动加载 封装
 const store = (action, obj = {}) => {        
-    let api = url[action];    
+    let api = urls[action];    
     class Store{
         constructor(){        
             this.namespaced=true,
@@ -52,7 +53,7 @@ const store = (action, obj = {}) => {
                     commit('pagesToOne');
                     let paramInit={page:1,size:state.size};
                     Object.assign(paramInit,paramO);
-                    let res = await $http(api,'GET',paramInit);
+                    let res = await $http.get(api,paramInit);
                     commit('setList',res);                    
                     return res;                    
                 },
@@ -62,7 +63,7 @@ const store = (action, obj = {}) => {
                         commit('pagesIncrease');
                         let paramInit={page:state.nowPage,size:state.size};
                         Object.assign(paramInit,paramO);
-                        let res = await $http(api,'GET',paramInit);
+                        let res = await $http.get(api,paramInit);
                         commit('listIncrease',res);
                         return res;
                     }

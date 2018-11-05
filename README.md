@@ -14,13 +14,19 @@ main等含有子路由的页面，引入structures后，在插槽中插入router
 ```
 一般在内页使用
 ```
-- 设置axios拦截器，加遮罩
-- 加vuex，vuex和fetch分开
-- 加事件总线
-- 全局filter
-- 公共js方法
-- 全局指令
-- config常用参数
+- config-index.js 设置proxyTable请求代理
+- components 功能组件
+- config 常用参数
+- eventBus 事件总线
+- filters 全局过滤器
+- http-http 封装的axios请求+请求loading+状态提示
+- http-urls 封装的所有接口地址
+- pages 页面组件
+- router 路由集成表
+- structures 结构组件
+- utils 全局函数
+- vuex 状态管理集成
+- main.js 入口函数
 ---
 # vue-cli脚手架
 # itservicecenter

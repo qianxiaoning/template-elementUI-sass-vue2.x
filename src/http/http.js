@@ -1,20 +1,44 @@
 import axios from 'axios';
 //兼容localstorage的包
 import storejs from 'storejs';
+// 以服务的方式调用。引入element Loading 服务
+import { Loading } from 'element-ui';
+let loadingInstance;
+// 引入消息提示
+import { Message } from 'element-ui';
+let messageInstance;
+
 //配置axios实例
-let instanceAxios = axios.create();
+let instanceAxios = axios.create({
+    headers:{
+        'Content-Type':'application/json;charset=UTF-8',
+        token:storejs("token")
+    },
+    timeout:'2000',    
+    // 跨域请求是否需要凭证 是否带上cookie
+    withCredentials:true,
+    // baseURL:url    
+});
 // 请求拦截器
 instanceAxios.interceptors.request.use(
   (config)=>{
     // 发送请求之前    
-    // moduleEvent.$emit('actionload', true);
-    config.headers.token = storejs("token");
+    // loading
+    loadingInstance = Loading.service({
+        text:'加载中...',
+        background:'rgba(0,0,0,.3)'
+    });        
     return config
   },
   //请求错误
   (error)=>{    
-    // moduleEvent.$emit('moduleload', false);
-    moduleEvent.$emit("errorNetWork", '网络异常');
+    //loading 停止
+    loadingInstance.close();
+    // 弹窗 网络异常    
+    messageInstance = Message({
+        message:'网络异常',
+        type:'warning',
+    });
     return Promise.reject(error)
   },
 )
@@ -22,32 +46,31 @@ instanceAxios.interceptors.request.use(
 instanceAxios.interceptors.response.use(
   (response)=>{
     //响应数据  
-    console.log(response);
-    // let resData = response.data;
-    // moduleEvent.$emit('moduleload', false);
-    // moduleEvent.$emit('actionload', false);
-    // if(resData.code == 200) return resData
-    // // 302 掉线
-    // else if(resData.code == 302) {
-    //     moduleEvent.$emit("errorNetWork", '账号已掉线，请重新登录');
-    //     location.href = '/#/login';
-    //     return Promise.reject(response);
-    // }
-    // else {
-    //     moduleEvent.$emit("errorNetWork", resData.msg);
-    //     return Promise.reject(response);
-    // }   
+    //loading停止
+    loadingInstance.close();
+    const res = response.data;
+    if(res.code==200){
+        return res;
+    }
+    else if(res.code==302){
+        messageInstance = Message({
+            message:'账号已掉线，请重新登录',
+            type:'warning',
+        });
+        return Promise.reject(response);
+    }    
   },
-  (error)=>{
-    // moduleEvent.$emit("errorNetWork", error.message);
-    // moduleEvent.$emit('moduleload', false);
-    // moduleEvent.$emit('actionload', false);
+  (error)=>{    
+    //loading停止
+    loadingInstance.close();
+    // 弹出错误
+    // messageInstance = Message({
+    //     message:error,
+    //     type:'warning',
+    // });
     return Promise.reject(error)
   },
 )
-// 跨域请求是否需要凭证 是否带上cookie
-instanceAxios.defaults.withCredentials = true
-instanceAxios.defaults.timeout = 2000
 
 //POST新增 DELETE删除 PUT更新 GET查询
 const http = {
@@ -73,62 +96,4 @@ const http = {
     },
 };
 
-// import {backLogin,showModal} from '@/utils/index';
-// //用wx改
-// const httpFun = (url, method, data,opt) => {
-//   //POST新增 GET查询 PUT更新 DELETE删除
-//   let myHeader = {
-//     'content-type': 'application/json',
-//     'Cookie': "sso-token=" + wx.getStorageSync('login').token,
-//   };
-
-//   return new Promise((resolve, reject) => {
-//     wx.showLoading({
-//       title: '加载中'      
-//     });
-//     wx.request({
-//       url: url,
-//       method: method,
-//       data: data,
-//       header: myHeader,
-//       success(res) {
-//         if(opt=='direct'){
-//           resolve(res.data);
-//         }
-//         if (res.data.code == 200) {
-//           resolve(res.data.data);
-//         }
-//         else if(res.data.code == 302){
-//           showModal({
-//             content: '账号已掉线，请重新登录',
-//             success(res) {
-//               if (res.confirm) {
-//                 backLogin();
-//               }
-//             }
-//           });
-//         }
-//         else if(res.data.code == 500){
-//           showModal({
-//             content: res.data.msg,            
-//           });          
-//         }
-//       },
-//       complete() {
-//         if(opt=='isLoading'){
-
-//         }
-//         else{
-//           wx.hideLoading();
-//         }        
-//       },
-//       fail(err) {
-//         showModal({
-//           content: '请求失败',
-//         });
-//         reject(err)
-//       }
-//     });
-//   });
-// }
 export default http

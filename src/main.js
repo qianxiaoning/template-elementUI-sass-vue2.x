@@ -18,6 +18,13 @@ import http from './http/http'
 Vue.prototype.$http = http
 // vuex
 import vuex from './vuex'
+// 事件总线
+import eventBus from './eventBus/eventBus'
+// Vue.prototype.$event = eventBus
+Vue.prototype.$event = new Vue();
+// 注册全局过滤器
+import filters from './filters/filters';
+Object.keys(filters).forEach(key => { Vue.filter(key, filters[key]) })
 
 //生产环境警告去除
 Vue.config.productionTip = false
