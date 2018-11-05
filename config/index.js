@@ -11,8 +11,8 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/eoop-api':{//监听请求头有/eoop-api，将localhost指向target
-        target:'http://app-uat.gtcloud.cn',
+      '/api':{//监听请求头有/api，将localhost指向target
+        target:'http://a.cloud.cn',
         changeOrigin:true,//开启代理
         secure: true,//如果是https接口，开启
         // pathRewrite:{//如果接口没有统一的匹配地址，在这里自定义重写匹配地址，:后固定为空。另外需要在host_dev中加入自定义的匹配地址，如/apis
