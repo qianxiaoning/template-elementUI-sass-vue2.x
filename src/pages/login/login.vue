@@ -15,7 +15,7 @@ export default {
     methods:{
         async login(){                        
             // const res = await this.$http.post(this.$urls.login,{});
-            console.log(res);
+            // console.log(res);
             this.$router.push({
                 path: '/main'
             });
