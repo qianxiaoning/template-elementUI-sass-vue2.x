@@ -15,18 +15,18 @@ main等含有子路由的页面，引入structures后，在插槽中插入router
 一般在内页使用
 ```
 - config-index.js 设置proxyTable请求代理
-- components 功能组件
-- config 常用参数
-- eventBus 事件总线
-- filters 全局过滤器
-- http-http 封装的axios请求+请求loading+状态提示
-- http-urls 封装的所有接口地址
-- pages 页面组件
-- router 路由集成表
-- structures 结构组件
-- utils 全局函数
-- vuex 状态管理集成
-- main.js 入口函数
+- src-components 功能组件
+- src-config 常用参数
+- src-eventBus 事件总线
+- src-filters 全局过滤器
+- src-http-http 封装的axios请求+请求loading+状态提示
+- src-http-urls 封装的所有接口地址
+- src-pages 页面组件
+- src-router 路由集成表
+- src-structures 结构组件
+- src-utils 全局函数
+- src-vuex 状态管理集成
+- src-main.js 入口函数
 ---
 # vue-cli脚手架
 # itservicecenter
