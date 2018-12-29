@@ -1,5 +1,5 @@
 
-### template-elementUi-sass-vue2说明
+### template-elementUi-sass-vue2.x说明
 - 组件封装原则，尽量扁平化，一对多，而不要层级太多、嵌套太多
 - 1、router路由 根据 pages页面来配
 - 2、结构组件structures（纯html,css结构，不含js）
