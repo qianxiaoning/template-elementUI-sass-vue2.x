@@ -12,7 +12,7 @@ let messageInstance;
 let instanceAxios = axios.create({
     headers:{
         'Content-Type':'application/json;charset=UTF-8',
-        token:storejs("token")
+        // token:storejs("token")
     },
     timeout:'2000',    
     // 跨域请求是否需要凭证 是否带上cookie
@@ -95,5 +95,5 @@ const http = {
         })
     },
 };
-
+window.instanceAxios = instanceAxios;
 export default http
