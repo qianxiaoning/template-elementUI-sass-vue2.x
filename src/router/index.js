@@ -1,6 +1,6 @@
 // token所需
 import http from '@/http/http'
-import urls from '@/pages/urls'
+import urls from '@/http/urls'
 // 路由
 import Vue from 'vue'
 import Router from 'vue-router'
