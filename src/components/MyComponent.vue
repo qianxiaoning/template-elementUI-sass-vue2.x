@@ -1,5 +1,5 @@
 <template>
-    <div></div>
+    <div>MyComponent</div>
 </template>
 <script>
 export default {
